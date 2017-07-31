@@ -12,14 +12,14 @@ export class DataService {
   registerUser(data){
   	
   	var param = JSON.stringify(data);
+    console.log(param);
   	param = '{"data":'+param+'}';
   	console.log(param);
   	var headers = new Headers();
   	headers.append('Content-Type','application/x-www-form--urlencoded');
 
-  	return this.http.post('https://ecommerce-freelance.herokuapp.com/register',param,{headers:headers})
-  	.map(res=>res.json());
-
-  	}
+  	return this.http.post(' https://ecommerce-freelance.herokuapp.com/register',param,{headers:headers})
+  	.map(res=>res.json())
+    }
 
 }
