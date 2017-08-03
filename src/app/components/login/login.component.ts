@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   data = {};
   rForm:FormGroup;
   post:any;
-   public isLoggedIn: boolean;
+  // public isLoggedIn: boolean;
    public user : string;
 
 
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     if(localStorage.getItem('userData')){
           this.router.navigate(['/profile']); // redirecting to home page
     }
+   
      /* (auth) => {
         if (auth == null) {
           console.log("Not Logged in.");
@@ -66,8 +67,10 @@ export class LoginComponent implements OnInit {
   	this.dataservice.loginUser(this.data).subscribe(
   		result=>{
        //this.toastyService.clearAll();
+      
        			console.log(result);
   			if(result.status==true){
+           this.slimLoadingBarService.start();
           var toastOptions:ToastOptions = {
             title: "Success",
             msg: "Redirecting to Profile",
@@ -76,11 +79,13 @@ export class LoginComponent implements OnInit {
             theme: 'bootstrap',
             
         };
+
+        localStorage.setItem('userData', JSON.stringify(result.userData));
         // Add see all possible types in one shot
             this.toastyService.success(toastOptions);
   				  console.log("stauts true");
-
-            this.router.navigate(['/profile']);
+            this.slimLoadingBarService.complete();
+            this.router.navigate(['/profile']);  
 
   			}
   			else if(result.status==false){
@@ -127,7 +132,7 @@ export class LoginComponent implements OnInit {
       console.log("in social login");
       console.log(data);
       localStorage.setItem('userData', JSON.stringify(data));
-      this.slimLoadingBarService.complete();
+        
       /*this.router.navigate(['/profile',{userData:JSON.stringify(data)}]);*/
       this.router.navigate(['/profile']);
     }).catch((data)=>{

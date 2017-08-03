@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Router } from "@angular/router";
 import {FacebookLoginService} from '../../services/facebook-login.service';
-import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 userData: any;     
 private sub: any;
 
-constructor(private route: ActivatedRoute,private router: Router,public afService: FacebookLoginService,private slimLoadingBarService: SlimLoadingBarService) { 
+constructor(private route: ActivatedRoute,private router: Router,public afService: FacebookLoginService) { 
 
 
 
@@ -43,8 +43,7 @@ constructor(private route: ActivatedRoute,private router: Router,public afServic
     }
   }
    logout() {
-    this.slimLoadingBarService.complete();
-     
+   
     localStorage.setItem('userData', '');
     this.afService.logout();
     this.router.navigate(['/login']);

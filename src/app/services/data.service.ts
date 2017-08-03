@@ -28,6 +28,7 @@ export class DataService {
       var params=JSON.stringify(data);
       console.log(params);
       var obj='{"data":'+params+'}';
+      console.log(obj)
       var headers=new Headers();
       headers.append('Content-Type','application/x-www-form--urlencoded');
       return this.http.post(' https://ecommerce-freelance.herokuapp.com/login',obj,{headers:headers})
@@ -35,11 +36,13 @@ export class DataService {
     }
 
     forgetPass(data){
+      console.log(data);
       var params=JSON.stringify(data);
       var obj='{"data":'+params+'}';
+      console.log(obj)
       var headers=new Headers();
       headers.append('Content-Type','application/x-www-form--urlencoded');
-       return this.http.post(' https://ecommerce-freelance.herokuapp.com/forgetpass',obj,{headers:headers})
+       return this.http.post(' https://ecommerce-freelance.herokuapp.com/forget-password',obj,{headers:headers})
     .map(res=>res.json());
   }
 

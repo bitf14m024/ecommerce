@@ -58,6 +58,7 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     ToastyModule.forRoot(),
      SlimLoadingBarModule.forRoot(),
+    
     RouterModule.forRoot([
     	{
     		path: '',
