@@ -120,9 +120,7 @@ export class LoginComponent implements OnInit {
  
 
   socialLogin(loginProvider) {
-     this.slimLoadingBarService.start(() => {
-            console.log('Loading complete');
-        });
+     this.slimLoadingBarService.start();
     console.log("logun social login");
     console.log(loginProvider)
     this.afService.socialLogin(loginProvider).then((data) => {
