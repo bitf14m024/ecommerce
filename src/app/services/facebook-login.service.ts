@@ -50,7 +50,8 @@ socialLogin(loginProvider) {
 // Logs out the current user
 logout() {
  return this.afAuth.auth.signOut();
-}
+  }
+
 }
 
 

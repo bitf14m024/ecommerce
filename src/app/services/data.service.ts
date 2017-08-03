@@ -10,6 +10,7 @@ export class DataService {
   }
 
   registerUser(data){
+
   	
   	var param = JSON.stringify(data);
     console.log(param);
@@ -32,5 +33,14 @@ export class DataService {
       return this.http.post(' https://ecommerce-freelance.herokuapp.com/login',obj,{headers:headers})
     .map(res=>res.json())
     }
+
+    forgetPass(data){
+      var params=JSON.stringify(data);
+      var obj='{"data":'+params+'}';
+      var headers=new Headers();
+      headers.append('Content-Type','application/x-www-form--urlencoded');
+       return this.http.post(' https://ecommerce-freelance.herokuapp.com/forgetpass',obj,{headers:headers})
+    .map(res=>res.json());
+  }
 
 }

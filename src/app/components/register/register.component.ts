@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators,ReactiveFormsModule  } from '@angular/forms';
 import {DataService} from '../../services/data.service';
+import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private dataservice:DataService,
-          private fb: FormBuilder) {
+          private fb: FormBuilder,private toastyService:ToastyService, private toastyConfig: ToastyConfig) {
           this.rForm = fb.group({
       'fname' : [null, Validators.required],
       'lname' : [null, Validators.required],
@@ -24,12 +25,9 @@ export class RegisterComponent implements OnInit {
       'country' : [null, Validators.required],
       'state' : [null, Validators.required],
       'address' : [null, Validators.required],
-       'gender' : [null, Validators.required],
-
+      'gender' : [null, Validators.required],
       'password' : [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(500)])],
-      
     });
-  	
   }
 
 
@@ -40,23 +38,74 @@ export class RegisterComponent implements OnInit {
 
   formSubmit(){
   	console.log("in form submit")
+var toastOptions:ToastOptions = {
+            title: "Wait",
+            msg: "Registering the user",
+            showClose: true,
+            timeout: 2000,
+            theme: 'bootstrap',
+            
+        };
+    this.toastyService.wait(toastOptions);
   	this.dataservice.registerUser(this.data)
   		.subscribe(
-  			data => {
-          console.log(data);
-          console.log(data.empty);
+  			result => {
+          var user=this.data;
+          this.data='';
+          console.log("user data is "+user);
+          console.log(result);
+          console.log(result.empty);
           
-  				if(data.success==1){
+  				if(result.success==1){
   					console.log("user registered");
+             var toastOptions:ToastOptions = {
+            title: "Success",
+            msg: "Redirecting to Verification",
+            showClose: true,
+            timeout: 9000,
+            theme: 'bootstrap',
+            
+        };
+        // Add see all possible types in one shot
+            this.toastyService.success(toastOptions);
+            
   				}
-  				else if(data.error==0){
+  				else if(result.error==0){
   					console.log("some error occured registering user");
+             var toastOptions:ToastOptions = {
+            title: "Error",
+            msg: "Cant registers",
+            showClose: true,
+            timeout: 10000,
+            theme: 'bootstrap',
+            
+        };
+         this.toastyService.error(toastOptions);
   				}
-          else if (data.empty==0){
+          else if (result.empty==0){
             console.log("Empty fields");
+             var toastOptions:ToastOptions = {
+            title: "Error",
+            msg: "Empty Fields",
+            showClose: true,
+            timeout: 10000,
+            theme: 'bootstrap',
+            
+        };
+         this.toastyService.error(toastOptions);
           }
-  				else if(data.found != 'undefined'){
+  				else if(result.found != 'undefined'){
   					console.log("email already exists");
+
+             var toastOptions:ToastOptions = {
+            title: "Info",
+            msg: "User already exist",
+            showClose: true,
+            timeout: 10000,
+            theme: 'bootstrap',
+            
+        };
+         this.toastyService.info(toastOptions);
   				}
   			}
   		);

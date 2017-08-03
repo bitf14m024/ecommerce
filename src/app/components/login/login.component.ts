@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
     });
  
     console.log("check status");
-    console.log(this.afService.afAuth.authState);
+    if(localStorage.getItem('userData')){
+          this.router.navigate(['/profile']); // redirecting to home page
+    }
      /* (auth) => {
         if (auth == null) {
           console.log("Not Logged in.");
@@ -54,16 +56,16 @@ export class LoginComponent implements OnInit {
             title: "Wait",
             msg: "Matching Credentials",
             showClose: true,
-            timeout: 9000,
+            timeout: 2000,
             theme: 'bootstrap',
             
         };
-this.toastyService.wait(toastOptions);
+    this.toastyService.wait(toastOptions);
   	this.dataservice.loginUser(this.data).subscribe(
   		result=>{
-       this.toastyService.clearAll;
+       //this.toastyService.clearAll();
        			console.log(result);
-  			if(result.status=='true'){
+  			if(result.status==true){
           var toastOptions:ToastOptions = {
             title: "Success",
             msg: "Redirecting to Profile",
@@ -74,11 +76,13 @@ this.toastyService.wait(toastOptions);
         };
         // Add see all possible types in one shot
             this.toastyService.success(toastOptions);
-  				  console.log("stauts true")
+  				  console.log("stauts true");
+
             this.router.navigate(['/profile']);
 
   			}
-  			else if(result.status=='false'){
+  			else if(result.status==false){
+          console.log("in the false")
            var toastOptions:ToastOptions = {
             title: "Error",
             msg: "Wrong Credentials",
@@ -122,7 +126,9 @@ this.toastyService.wait(toastOptions);
     this.afService.socialLogin(loginProvider).then((data) => {
       console.log("in social login");
       console.log(data);
-      this.router.navigate(['/profile',{userData:JSON.stringify(data)}]);
+      localStorage.setItem('userData', JSON.stringify(data));
+      /*this.router.navigate(['/profile',{userData:JSON.stringify(data)}]);*/
+      this.router.navigate(['/profile']);
     }).catch((data)=>{
         console.log(data);
         console.log("in catch");

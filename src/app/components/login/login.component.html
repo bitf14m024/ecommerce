@@ -38,7 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="forgot-grid">
 						<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>
 						<div class="forgot">
-							<a href="#">Forgot Password?</a>
+							<a href="/forgetpass">Forgot Password?</a>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -49,7 +49,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<h5> - OR -</h5>
 			<div class="social-btn"><a  (click)="socialLogin('facebook')" *ngIf="!(user | async)?.uid" ><i>Sign In with Facebook</i></a></div>
 			<div class="social-btn sb-two"><a (click)="socialLogin('twitter')" *ngIf="!(user | async)?.uid"><i>Sign In with Twitter</i></a></div>
-			<div class="social-btn sb-three"><a (click)="socialLogin('google')" *ngIf="!(user | async)?.uid"><i>Sign In with Googlee</i></a></div>
+			<br><br>
+			<div class="social-btn sb-three" style="background-color:red"><a (click)="socialLogin('google')" *ngIf="!(user | async)?.uid"><i>Sign In with Google</i></a></div>
 		</div>
 	</div>
 	<ng2-toasty></ng2-toasty>

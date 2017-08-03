@@ -8,26 +8,24 @@ import { Router } from "@angular/router";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-userData: any;
-     
- id: number;
-  private sub: any;
+userData: any;     
+private sub: any;
 
-  constructor(private route: ActivatedRoute,private router: Router) { 
+constructor(private route: ActivatedRoute,private router: Router) { 
 
 
 
-  this.user();
+  this.session();
 }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+   /* this.sub = this.route.params.subscribe(params => {
        console.log("in porgile params");
        var result=JSON.parse(params.userData);
        console.log(result);
        this.userData=result;
        console.log(result.user.photoURL);
-     });
+     });*/
    
 
 
@@ -37,13 +35,18 @@ userData: any;
     
 
   }
-  user() {
-
-    if (localStorage.getItem('userData')) {
+  session() {
+    var storage=localStorage.getItem('userData')
+    if (storage) {
+      console.log("in session");
+      var result=JSON.parse(localStorage.getItem('userData'));
+      console.log(result);
       this.userData = JSON.parse(localStorage.getItem('userData'));
     }
     else {
       console.log("No Data");
+      this.router.navigate(['/login']);
+
     }
   }
 

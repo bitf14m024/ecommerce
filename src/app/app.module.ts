@@ -13,12 +13,16 @@ import { FooterComponent } from './components/footer/footer.component';
 import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+
 import {DataService} from './services/data.service';
 import { AngularFireModule } from 'angularfire2';
 import {FacebookLoginService} from './services/facebook-login.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {ToastyModule} from 'ng2-toasty';
+import { ForgetPassComponent } from './components/forget-pass/forget-pass.component';
+import { VerifyComponent } from './components/verify/verify.component';
+
 
 
 
@@ -40,7 +44,9 @@ export const firebaseConfig = {
     FooterComponent,
     IndexComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+      ForgetPassComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +73,14 @@ export const firebaseConfig = {
         {
             path:'profile',
             component:ProfileComponent
+        },
+        {
+            path:'verification',
+            component:VerifyComponent  
+        },
+        {
+            path:'forgetpass',
+            component:ForgetPassComponent
         }
         
     ])
