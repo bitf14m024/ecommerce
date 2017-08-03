@@ -4,6 +4,7 @@ import {DataService} from '../../services/data.service';
 import {FacebookLoginService} from '../../services/facebook-login.service';
 import { Router } from "@angular/router";
 import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private dataservice:DataService,
-          private fb: FormBuilder,public afService: FacebookLoginService, private router: Router,private toastyService:ToastyService, private toastyConfig: ToastyConfig) {
+          private fb: FormBuilder,public afService: FacebookLoginService, private router: Router,private toastyService:ToastyService, private toastyConfig: ToastyConfig,private slimLoadingBarService: SlimLoadingBarService) {
   				this.rForm = fb.group({
       'email' : [null, Validators.required],
       'password' : [null, Validators.required],
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+
      var toastOptions:ToastOptions = {
             title: "Wait",
             msg: "Matching Credentials",
@@ -115,18 +117,19 @@ export class LoginComponent implements OnInit {
 
   	);
   }
-  logout() {
-    localStorage.setItem('userData', '');
-    this.afService.logout();
-  }
+ 
 
   socialLogin(loginProvider) {
+     this.slimLoadingBarService.start(() => {
+            console.log('Loading complete');
+        });
     console.log("logun social login");
     console.log(loginProvider)
     this.afService.socialLogin(loginProvider).then((data) => {
       console.log("in social login");
       console.log(data);
       localStorage.setItem('userData', JSON.stringify(data));
+      this.slimLoadingBarService.complete();
       /*this.router.navigate(['/profile',{userData:JSON.stringify(data)}]);*/
       this.router.navigate(['/profile']);
     }).catch((data)=>{

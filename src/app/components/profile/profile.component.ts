@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Router } from "@angular/router";
+import {FacebookLoginService} from '../../services/facebook-login.service';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -11,7 +13,7 @@ export class ProfileComponent implements OnInit {
 userData: any;     
 private sub: any;
 
-constructor(private route: ActivatedRoute,private router: Router) { 
+constructor(private route: ActivatedRoute,private router: Router,public afService: FacebookLoginService,private slimLoadingBarService: SlimLoadingBarService) { 
 
 
 
@@ -26,21 +28,12 @@ constructor(private route: ActivatedRoute,private router: Router) {
        this.userData=result;
        console.log(result.user.photoURL);
      });*/
-   
-
-
-   // x`(+) converts string 'id' to a number
-
-       // In a real app: dispatch action to load the details here.
-    
-
+  
   }
   session() {
     var storage=localStorage.getItem('userData')
     if (storage) {
-      console.log("in session");
       var result=JSON.parse(localStorage.getItem('userData'));
-      console.log(result);
       this.userData = JSON.parse(localStorage.getItem('userData'));
     }
     else {
@@ -48,6 +41,13 @@ constructor(private route: ActivatedRoute,private router: Router) {
       this.router.navigate(['/login']);
 
     }
+  }
+   logout() {
+    this.slimLoadingBarService.complete();
+     
+    localStorage.setItem('userData', '');
+    this.afService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

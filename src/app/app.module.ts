@@ -22,7 +22,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import {ToastyModule} from 'ng2-toasty';
 import { ForgetPassComponent } from './components/forget-pass/forget-pass.component';
 import { VerifyComponent } from './components/verify/verify.component';
-
+import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
 
 
@@ -57,6 +57,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ToastyModule.forRoot(),
+     SlimLoadingBarModule.forRoot(),
     RouterModule.forRoot([
     	{
     		path: '',
