@@ -22,4 +22,15 @@ export class DataService {
   	.map(res=>res.json())
     }
 
+    loginUser(data){
+
+      var params=JSON.stringify(data);
+      console.log(params);
+      var obj='{"data":'+params+'}';
+      var headers=new Headers();
+      headers.append('Content-Type','application/x-www-form--urlencoded');
+      return this.http.post(' https://ecommerce-freelance.herokuapp.com/login',obj,{headers:headers})
+    .map(res=>res.json())
+    }
+
 }
