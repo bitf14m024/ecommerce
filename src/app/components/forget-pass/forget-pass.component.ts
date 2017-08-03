@@ -48,8 +48,10 @@ data = {};
   						
   					}
   					else if (result.status==false){
+
   							console.log("mail not sent");
-  							var toastOptions:ToastOptions = {
+  						console.log(result);
+              	var toastOptions:ToastOptions = {
            					 title: "Eroor",
            					 msg: "Error,Please try agian",
             				showClose: true,
