@@ -10,16 +10,40 @@ export class DataService {
   }
 
   registerUser(data){
+
   	
   	var param = JSON.stringify(data);
+    console.log(param);
   	param = '{"data":'+param+'}';
   	console.log(param);
   	var headers = new Headers();
   	headers.append('Content-Type','application/x-www-form--urlencoded');
 
-  	return this.http.post('https://ecommerce-freelance.herokuapp.com/register',param,{headers:headers})
-  	.map(res=>res.json());
+  	return this.http.post(' https://ecommerce-freelance.herokuapp.com/register',param,{headers:headers})
+  	.map(res=>res.json())
+    }
 
-  	}
+    loginUser(data){
+
+      var params=JSON.stringify(data);
+      console.log(params);
+      var obj='{"data":'+params+'}';
+      console.log(obj)
+      var headers=new Headers();
+      headers.append('Content-Type','application/x-www-form--urlencoded');
+      return this.http.post(' https://ecommerce-freelance.herokuapp.com/login',obj,{headers:headers})
+    .map(res=>res.json())
+    }
+
+    forgetPass(data){
+      console.log(data);
+      var params=JSON.stringify(data);
+      var obj='{"data":'+params+'}';
+      console.log(obj)
+      var headers=new Headers();
+      headers.append('Content-Type','application/x-www-form--urlencoded');
+       return this.http.post(' https://ecommerce-freelance.herokuapp.com/forget-password',obj,{headers:headers})
+    .map(res=>res.json());
+  }
 
 }
