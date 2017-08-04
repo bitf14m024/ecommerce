@@ -45,5 +45,21 @@ export class DataService {
        return this.http.post(' https://ecommerce-freelance.herokuapp.com/forget-password',obj,{headers:headers})
     .map(res=>res.json());
   }
+  getCategories(){
+   
+      var headers=new Headers();
+      headers.append('Content-Type','application/x-www-form--urlencoded');
+      return this.http.get(' https://ecommerce-freelance.herokuapp.com/get-categories',{headers:headers})
+    .map(res=>res.json());
+    }
+   getSubCategories(data){
+     var params='{"category_id":'+data+'}';
+      var obj='{"category":'+params+'}';
+      console.log(obj);
+      var headers=new Headers();
+      headers.append('Content-Type','application/x-www-form--urlencoded');
+      return this.http.post(' https://ecommerce-freelance.herokuapp.com/get-subcategories',obj,{headers:headers})
+    .map(res=>res.json());
+    }
 
 }

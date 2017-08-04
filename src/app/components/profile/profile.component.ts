@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
 userData: any;     
 private sub: any;
 
+
 constructor(private route: ActivatedRoute,private router: Router,public afService: FacebookLoginService) { 
 
 
