@@ -59,7 +59,10 @@
 						</button>
 					</div>
 					<!--navbar-header-->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul *ngFor="let keysub of keysub" class="multi-column-dropdown ">
+												
+            		<li id={{subcat[keysub].id}} ><a> {{subcat[keysub].name}}</a></li>					
+					</ul><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav top-nav-info">
 							<li><a href="index.html" class="active">Home</a></li>
 							<li class="dropdown">
@@ -68,22 +71,11 @@
 									<div class="row">
 										<div class="col-sm-4 menu-grids menulist1">
 											<h4>Bath & Care</h4>
-											<ul class="multi-column-dropdown ">
-												<li><a class="list" href="products.html">Diapering</a></li>
-												<li><a class="list" href="products.html">Baby Wipes</a></li>
-												<li><a class="list" href="products.html">Baby Soaps</a></li>
-												<li><a class="list" href="products.html">Lotions & Oils </a></li>
-												<li><a class="list" href="products.html">Powders</a></li>
-												<li><a class="list" href="products.html">Shampoos</a></li>
+											<ul *ngFor="let key of keys" class="multi-column-dropdown ">
+												
+            									<li id={{userData[key].id}} ><a class="list" (click)="sub(userData[key].id)"> {{userData[key].name}}</a></li>					
 											</ul>
-											<ul class="multi-column-dropdown">
-												<li><a class="list" href="products.html">Body Wash</a></li>
-												<li><a class="list" href="products.html">Cloth Diapers</a></li>
-												<li><a class="list" href="products.html">Baby Nappies</a></li>
-												<li><a class="list" href="products.html">Medical Care</a></li>
-												<li><a class="list" href="products.html">Grooming</a></li>
-												<li><h6><a class="list" href="products.html">Combo Packs</a></h6></li>
-											</ul>
+											
 										</div>																		
 										<div class="col-sm-2 menu-grids">
 											<h4>Baby Clothes</h4>
