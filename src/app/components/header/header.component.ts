@@ -5,15 +5,22 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
-  
+
 })
 export class HeaderComponent implements OnInit {
-userData: any;  
+userData: any;
 subcat:any;
 keysub:string[];
+check:any;
 
  keys: String[];
-  constructor(private dataservice:DataService,private router: Router) { 
+
+  constructor(private dataservice:DataService,private router: Router) {
+  this.check=0;
+   var session= localStorage.getItem('userData');
+    if(session){
+      this.check=1;
+    }
   		this.getCategory();
   }
 
@@ -49,7 +56,7 @@ keysub:string[];
   				this.keysub=Object.keys(this.subcat);
 
   			}
-  		
+
 
   	});
   }
