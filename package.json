@@ -4,7 +4,6 @@
   "license": "MIT",
   "main": "app.js",
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
     "prestart": "npm install",
     "ng": "ng",
     "start": "ng serve",
