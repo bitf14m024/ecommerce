@@ -144,7 +144,7 @@
 											<h4>Categories</h4>
                       <ul  class="multi-column-dropdown ">
 
-                        <li *ngFor="let key of keys" id={{userData[key].id}} ><a class="list" style="text-decoration: none" (click)="sub(userData[key].id)"> {{userData[key].name}}</a></li>
+                        <li *ngFor="let key of keys" id={{userData[key].id}} ><a class="list" style="text-decoration: none;cursor: pointer" (click)="sub(userData[key].id)"> {{userData[key].name}}</a></li>
 
 
 											</ul>
@@ -152,7 +152,7 @@
 										</div>
 										<div class="col-sm-2 menu-grids">
 											<h4>Sub Categories</h4>
-                      <ul  class="multi-column-dropdown ">
+                      <ul class="multi-column-dropdown ">
 
                         <li *ngFor="let keysub of keysub" id={{subcat[keysub].id}} ><a class="list" href="#"> {{subcat[keysub].name}}</a></li>
 
